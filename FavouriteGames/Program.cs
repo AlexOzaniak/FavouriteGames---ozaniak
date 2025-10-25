@@ -10,15 +10,26 @@ Console.WriteLine(@"
                                         
                                         ");
 
-  
+
 Console.WriteLine("Vitaj v Aplikacii \n Made by Alex Ozaniak");
 Console.WriteLine(" nacitavam program...");
 await Task.Delay(1250);
 Console.Clear();
 
-
-string filename = @"C:\Users\Asus\Desktop\FavGames.txt";
-string text = File.ReadAllText(filename);
+Console.WriteLine("Zadaj cestu k svojmu súboru s hrami (napr. C:\\Users\\TvojeMeno\\Documents\\MojeHry.txt): alebo napis [skip pre preskocenie tohto kroku");
+string filename = Console.ReadLine();
+if (filename == null)
+{
+    Console.WriteLine("musis tam nieco napisat sigma");
+}
+else if (filename == "skip")
+{
+    Console.WriteLine("dobre sigma");
+}
+else
+{
+    string text = File.ReadAllText(filename);
+}
 // menuzoznam
 List<string> Hry = new List<string>();
 if (File.Exists(filename))
@@ -32,7 +43,7 @@ ___  ___
 |  \/  |                 
 | .  . | ___ _ __  _   _ 
 | |\/| |/ _ \ '_ \| | | |
-| |  | |  __/ | | | |_| |
+| |  | |  __/ | | | |_| |AC
 \_|  |_/\___|_| |_|\__,_|
                          
                          ");
@@ -54,6 +65,7 @@ do
     }
 
 } while (VstupMenu != 5);
+
 void SaveGames()
 {
     File.WriteAllLines(filename, Hry);
@@ -81,8 +93,8 @@ void GetGame()
         Console.WriteLine(" Hra nebola pridana");
         return;
     }
-} 
-    void ShowGames()
+}
+void ShowGames()
 {
     Console.Clear();
     Console.WriteLine("Momentalne mas ulozene tieto hry:");
@@ -103,56 +115,56 @@ void GetGame()
         Console.WriteLine(" okay no tak si tu ostan");
     }
 }
-    
 
-    
-    void searchGame()
-    {
-        Console.Clear();
-        Console.WriteLine("zadaj nazov hry ktoru chces vyhladat:");
-        string GameSearch = Console.ReadLine().ToUpper();
+
+
+void searchGame()
+{
+    Console.Clear();
+    Console.WriteLine("zadaj nazov hry ktoru chces vyhladat:");
+    string GameSearch = Console.ReadLine().ToUpper();
     if (Hry.Any(h => h.Equals(GameSearch, StringComparison.OrdinalIgnoreCase)))
-        
+
     {
-        
+
         Console.WriteLine($" {GameSearch} sa uz nachadza v tvojom zozname");
     }
 
     else
     {
-            Console.WriteLine("tato hra sa v tvojom zozname nenachadza");
-        }
-        Console.WriteLine("pre vratenie sa do menui stlac klavesu  [G] ");
-        char menu2 = char.Parse(Console.ReadLine());
-
-
+        Console.WriteLine("tato hra sa v tvojom zozname nenachadza");
     }
-    void DeleteGame()
-    {
-        Console.Clear();
-        Console.WriteLine(" aku hru si prajes vymazat");
-        string gamedelete = Console.ReadLine();
-        if (Hry.Contains(gamedelete))
-        {
+    Console.WriteLine("pre vratenie sa do menui stlac klavesu  [G] ");
+    char menu2 = char.Parse(Console.ReadLine());
 
-            Hry.Remove(gamedelete);
+
+}
+void DeleteGame()
+{
+    Console.Clear();
+    Console.WriteLine(" aku hru si prajes vymazat");
+    string gamedelete = Console.ReadLine();
+    if (Hry.Contains(gamedelete))
+    {
+
+        Hry.Remove(gamedelete);
         SaveGames();
         Console.WriteLine($"hra {gamedelete} bola vymazana ");
-        }
-        else
-        {
-            Console.WriteLine("nastal error hra nebola vymazana");
-        }
-            Console.WriteLine("pre vratenie sa do menui stlac klavesu  [G] ");
-            char menu2 = char.Parse(Console.ReadLine());
-        
-        }
-    void EndProgram()
-    {
-        Console.Clear();
-        Console.WriteLine("program sa ukoncuje....");
-        
     }
+    else
+    {
+        Console.WriteLine("nastal error hra nebola vymazana");
+    }
+    Console.WriteLine("pre vratenie sa do menui stlac klavesu  [G] ");
+    char menu2 = char.Parse(Console.ReadLine());
 
-    
+}
+void EndProgram()
+{
+    Console.Clear();
+    Console.WriteLine("program sa ukoncuje....");
+
+}
+
+
 
