@@ -1,5 +1,7 @@
 ﻿
 
+using System.Threading.Tasks;
+
 Console.WriteLine(@"
  _    _      _                          
 | |  | |    | |                         
@@ -56,11 +58,11 @@ do
 
     switch (VstupMenu)
     {
-        case 1: GetGame(); break;
-        case 2: ShowGames(); break;
-        case 3: searchGame(); break;
-        case 4: DeleteGame(); break;
-        case 5: EndProgram(); break;
+        case 1: await GetGame(); break; 
+        case 2:  ShowGames(); break;
+        case 3:  searchGame(); break;
+        case 4:  DeleteGame(); break;
+        case 5:  EndProgram(); break;
         default: Console.WriteLine("Neplatna volba!"); break;
     }
 
@@ -68,29 +70,33 @@ do
 
 void SaveGames()
 {
-    File.WriteAllLines(filename, Hry);
+    File.WriteAllLines(filename,Hry);
 }
 
 
-void GetGame()
+async Task GetGame()
 {
     Console.Clear();
     Console.WriteLine("aku hru chces pridat do zoznamu:");
     string pridathru = Console.ReadLine();
     if (Hry.Contains(pridathru))
     {
+        Console.WriteLine(" tato hra sa v tvojm zozname uz nachadza. \n vraciam ta do hlavneho menu ...");
+        await Task.Delay(1000);
         return;
     }
     Hry.Add(pridathru);
     SaveGames();
     if (Hry.Contains(pridathru))
     {
-        Console.WriteLine($" hra {pridathru} bola uspesne pridana");
+        Console.WriteLine($" hra {pridathru} bola uspesne pridana \n vraciam ta do menu...");
+        await Task.Delay(1000);
         return;
     }
     else
     {
-        Console.WriteLine(" Hra nebola pridana");
+        Console.WriteLine(" Hra nebola pridana \n vraciam ta do menu...");
+        await Task.Delay (1000);
         return;
     }
 }
